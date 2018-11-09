@@ -1,0 +1,200 @@
+{
+  "entries": [
+    {
+      "id": 1538227905195,
+      "enabled": true,
+      "stratum": "stratum+tcp://lbry.usa.nicehash.com:3356",
+      "username": "3M4fzgQPuSzhLc6apuCUaehJqAWu3FvveG",
+      "password": "x",
+      "prio": 0,
+      "appendWorker": true,
+      "algorithm": "",
+      "algo": "lbry",
+      "group": "B"
+    },
+    {
+      "id": 1538230225598,
+      "enabled": true,
+      "stratum": "stratum+tcp://pascal.eu.nicehash.com:3358",
+      "username": "3M4fzgQPuSzhLc6apuCUaehJqAWu3FvveG",
+      "password": "x",
+      "prio": 1,
+      "appendWorker": true,
+      "algorithm": "",
+      "algo": "pascal",
+      "group": "B"
+    },
+    {
+      "id": 1538210433502,
+      "enabled": true,
+      "stratum": "stratum+tcp://qubit.hk.nicehash.com:3344",
+      "username": "3M4fzgQPuSzhLc6apuCUaehJqAWu3FvveG",
+      "password": "x",
+      "prio": 2,
+      "appendWorker": true,
+      "algorithm": "",
+      "algo": "qubit",
+      "group": "x10"
+    },
+    {
+      "id": 1520186998951,
+      "enabled": true,
+      "stratum": "stratum+tcp://quark.hk.nicehash.com:3345",
+      "username": "3M4fzgQPuSzhLc6apuCUaehJqAWu3FvveG",
+      "password": "x",
+      "prio": 3,
+      "appendWorker": true,
+      "algorithm": "",
+      "algo": "quark",
+      "group": "x10"
+    }
+  ],
+  "devices": [
+    {
+      "id": 1538229588160,
+      "enabled": true,
+      "name": "b1",
+      "protocol": "http",
+      "hostname": "192.168.10.151",
+      "hashrate": 10000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "x10"
+      ]
+    },
+    {
+      "id": 1520759576948,
+      "enabled": true,
+      "name": "b2",
+      "protocol": "http",
+      "hostname": "192.168.10.152",
+      "hashrate": 10000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "x10"
+      ]
+    },
+    {
+      "id": 1520759498668,
+      "enabled": true,
+      "name": "b3",
+      "protocol": "http",
+      "hostname": "192.168.10.153",
+      "hashrate": 10000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "x10"
+      ]
+    },
+    {
+      "id": 1520757943735,
+      "enabled": true,
+      "name": "b4",
+      "protocol": "http",
+      "hostname": "192.168.10.154",
+      "hashrate": 10000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "x10"
+      ]
+    },
+    {
+      "id": 1538229612085,
+      "enabled": true,
+      "name": "bb1",
+      "protocol": "http",
+      "hostname": "192.168.10.121",
+      "hashrate": 40000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "B"
+      ]
+    },
+    {
+      "id": 1538229631861,
+      "enabled": true,
+      "name": "bb2",
+      "protocol": "http",
+      "hostname": "192.168.10.122",
+      "hashrate": 40000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "B"
+      ]
+    },
+    {
+      "id": 1538229671854,
+      "enabled": true,
+      "name": "bb3",
+      "protocol": "http",
+      "hostname": "192.168.10.123",
+      "hashrate": 40000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "B"
+      ]
+    },
+    {
+      "id": 1538229719301,
+      "enabled": true,
+      "name": "bb4",
+      "protocol": "http",
+      "hostname": "192.168.10.124",
+      "hashrate": 40000,
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "B"
+      ]
+    },
+    {
+      "id": 1540964091265,
+      "enabled": true,
+      "name": "mcl",
+      "protocol": "http",
+      "hostname": "192.168.10.125",
+      "units": 3,
+      "tmin": 0,
+      "tmax": 60,
+      "groups": [
+        "B"
+      ],
+      "hashrate": 40000
+    }
+  ],
+  "groups": [
+    {
+      "id": 1520759590964,
+      "enabled": true,
+      "name": "B",
+      "autoswitch": false,
+      "region": "eu"
+    },
+    {
+      "id": 1520186996292,
+      "enabled": true,
+      "name": "x10",
+      "autoswitch": false,
+      "region": "eu"
+    }
+  ],
+  "profitabilityServiceUrl": "127.0.0.1:8081",
+  "deployOnStartup": false,
+  "autoswitchInterval": 5,
+  "statsEnabled": true
+}
