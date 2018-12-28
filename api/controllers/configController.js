@@ -241,6 +241,7 @@ function deployConfigToMiner(device,query){
   for(var i=0;i<query.pools.length;i++){
     query.pools[i].user=query.pools[i].user.replace("#APPEND#",device.name);
   }
+  console.log(JSON.stringify(query));
   var arr = device.hostname.split(":");
   switch(device.protocol){
     case "http":

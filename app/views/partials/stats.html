@@ -2,9 +2,9 @@
 <div class="col-md-12">
   
 <!-- Моя вставка -->
-    <div class="col-md-12" style="margin-bottom: 10px;">  </div>
+    <div class="col-md-12" style="margin-bottom: 10px">  </div>
     
-    <title> {{statsVm.current}}</title>
+    <!-- <div>{{statsVm}}</div> -->
 
     <table class="table table-bordered table-condensed">
       <thead>
@@ -23,11 +23,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="entry in statsVm.current.entries | toArray |orderBy:'name'" style="margin-bottom: 70px;">
+        <tr ng-repeat="entry in statsVm.current.entries | toArray |orderBy:'name'" >
           <td>{{$index+1}}</td>
           <td><a ng-href ="Http:\\{{entry.hostname}}" target="_blank">{{entry.name}}</a></td>
+
+          <td ng-bind="entry.hostname"></td>
+          <td ng-class="{success:({{entry.time}}-{{entry.devs[0].LastShareTime}})<5*60, danger:({{entry.time}}-{{entry.devs[0].LastShareTime}})>=5*60 }">{{1000*entry.devs[0].LastShareTime|date:'HH:mm:ss'}}</td>
+
           <td>{{entry.hostname}}</td>
           <td>{{1000*entry.devs[0].LastShareTime|date:'HH:mm:ss'}}</td>
+
           <td>{{entry.devs[0].Algo}}</td>
           <td ng-class="{success:entry.pi.temp<entry.tmax && entry.pi.temp>entry.tmin,danger:entry.pi.temp>=entry.tmax || entry.pi.temp<=entry.tmin}">{{entry.pi.temp}} °C</td> 
           <td ng-class="{success:entry.dtot.devices == entry.units ,danger:entry.dtot.devices != entry.units}">{{entry.dtot.devices}}</td>
@@ -38,7 +43,10 @@
         </tr>
       </tbody>
     </table>  
-<!-- Конец моей вставки -->
+    
+
+
+    <!-- Конец моей вставки -->
 
 <!-- Spoiler  -->
    <!-- <div class="spoiler"> -->
@@ -50,9 +58,17 @@
         <div class="spoiler-head">Details ... </div>
         <div class="spoiler-body">
 
-
-
-      <div ng-repeat="entry in statsVm.current.entries | toArray |orderBy:'name'" style="margin-bottom: 70px;">
+          <table class="table table-bordered table-condensed">
+            <tbody>
+              <tr style="border-top: 2px solid black;border-bottom: 2px solid black;">
+                <td> Show unused DEVICES <input type="checkbox" ng-model="ShowUnusedDevices">  </td>
+                <td> Show unused POOLS <input type="checkbox" ng-model="ShowUnusedPools"> </td>
+              </tr>  
+            </tbody>
+          </table >
+ 
+          
+      <div ng-repeat="entry in statsVm.current.entries | toArray | orderBy:'name'" style="margin-bottom: 70px;">
 
         <div class="col-md-12" style="margin-bottom: 10px;">
           <span style="font-size:150%;"><b>Miner: {{entry.name}}&nbsp;{{entry.hostname}}</b></span>
@@ -77,7 +93,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="d in entry.devs track by $index">
+            <!-- <tr ng-repeat="d in entry.devs | myFilter | track by $index"> -->
+            <tr ng-repeat="d in entry.devs | ShowUnusedDevice:ShowUnusedDevices track by $index">  
               <td ng-bind="d.Name" class='text-left' ng-class="{danger:d.MHS5s>0 && (d.Rejected/d.TotalShares > .1 || d.HardwareErrors/d.TotalShares > .1)}"></td>
               <td>{{d.ID}}</td>
               <td>{{d.Algo}}</td>
@@ -107,7 +124,7 @@
         </tfoot>
       </table>
 
-      <table ng-show="entry.pools" class="table table-bordered table-condensed">
+      <table ng-show="entry.pools"  class="table table-bordered table-condensed">
         <thead>
           <tr>
             <th>URL</th>
@@ -128,7 +145,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="p in entry.pools">
+          <tr ng-repeat="p in entry.pools | ShowUnusedPools:ShowUnusedPools">
             <td ng-bind="p.URL" class='text-left ellipsis'></td>
             <td ng-bind="p.User" class='text-left ellipsis'></td>
             <td ng-bind="p.Status" class='text-left' ng-class="{success:p.Status=='Alive',danger:p.Status!='Alive'}"></td>

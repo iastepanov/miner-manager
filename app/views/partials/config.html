@@ -1,33 +1,41 @@
 <form name="config">
-
-  <div class="row" style="margin-bottom: 10px;">
-    <div  class="col-md-12">
-      Deploy on startup: <input type="checkbox" ng-model="configVm.config.deployOnStartup" ng-click="configVm.setConfig()"> (in case autoswitching will be used)
-    </div>
-  </div>
-
-  <div class="row" style="margin-bottom: 10px;">
-    <div  class="col-md-12">
-      enable stats collection: <input type="checkbox" ng-model="configVm.config.statsEnabled" ng-click="configVm.setConfig()">
-    </div>
-  </div>
-
-  <div class="row" style="margin-bottom: 10px;">
-    <div  class="col-md-12">
-      <a href="https://github.com/felixbrucker/profitability-service" target="_blank">Profitability-Service</a> URL: <input type="text" name="profitabilityServiceUrl" ng-model="configVm.config.profitabilityServiceUrl" size="26" placeholder="IP:PORT eg. 127.0.0.1:8081"> (in case autoswitching will be used)
-    </div>
-  </div>
-
-  <div class="row" style="margin-bottom: 10px;">
-    <div  class="col-md-12">
-      <input type="number" name="autoswitchInterval" ng-model="configVm.config.autoswitchInterval" placeholder="3"> min (in case autoswitching will be used)
-    </div>
-  </div>
-  <td></td>
+  
+  <div class="row" style="margin-left: 10px;">Profitabitlity Service monitoring stttings</div>
+<!-- Profitability steetings -->
+  <table class="table table-bordered table-condensed">
+  <tr style="border-top: 2px solid black;border-bottom: 2px solid black;">
+    
+    <td><a href="https://github.com/felixbrucker/profitability-service" target="_blank">Profitability-Service</a> URL
+      <input type="text" name="profitabilityServiceUrl" ng-model="configVm.config.profitabilityServiceUrl" size="18" placeholder="IP:PORT eg. 127.0.0.1:8081">
+    </td>
+    <td>In case autoswitching will be use (Deploy on startup:
+        <input type="checkbox" ng-model="configVm.config.deployOnStartup" ng-click="configVm.setConfig()">&nbsp&nbsp&nbsp&nbsp  
+        Refresh profitability interval <input type="number" name="autoswitchInterval" ng-model="configVm.config.autoswitchInterval" placeholder="3" min="0.01" max="99999"> minute). 
+    </td>  
+  </tr >
+  </table>
+    
+  <!--Device settings -->
+  <div class="row" style="margin-left: 10px;">Device monitoring stttings</div>
+  <div></div>
+  <table class="table table-bordered table-condensed">
+   <tr style="border-top: 2px solid black;">
+    <!-- <td>Show unused POOLS -->
+      <!-- <input type="checkbox" ng-model="configVm.config.ShowUnusedPools" ng-click="configVm.setConfig()">  -->
+    <!-- </td> -->
+    <!-- <td>Show unused DEVICES -->
+      <!-- <input type="checkbox" ng-model="configVm.config.ShowUnusedDevices" ng-click="configVm.setConfig()"> -->
+    <!-- </td> -->
+    <td>Refresh stats interval
+      <input type="number" name="RefreshStatsInterval" ng-model="configVm.config.RefreshStatsInterval" min = "10" max="99999" ng-change="configVm.setConfig()"> seconds
+    </td>
+   </tr>
+  </table>
+ 
 
   <div class="row" style="margin-bottom: 10px;">
     <div class="col-md-12">
-      <table class='table table-borderless'>
+      <table class="table table-borderless">
         <tr>
           <th>enabled</th>
           <th>name</th>
@@ -48,6 +56,12 @@
           <!-- <td><select name="groupSelect-{{entry.id}}" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="entry.groups" multiple required></select></td> -->
           
           <td><select name="groupSelect-{{entry.id}}" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="entry.groups[0]" required></select></td>
+
+          <td><input type="number" name="hashrate-{{entry.id}}" ng-model="entry.hashrate" placeholder="150" min="0" max="999999"required> MH/s</td>
+          <td><input type="number" name="{{entry.units}}" ng-model="entry.units" placeholder="3" min="1" max="999" required> </td>
+          <td><input type="number" name="{{entry.tmin}}" ng-model="entry.tmin" placeholder="0"  min="-99" max="999"  required> °C</td>
+          <td><input type="number" name="{{entry.tmax}}" ng-model="entry.tmax" placeholder="40"  min="0" max="999" required> °C</td>
+
           <td><input type="number" name="hashrate-{{entry.id}}" ng-model="entry.hashrate" placeholder="150" min="0" max="99999999999" step="100"  required> MH/s</td>
           <td><input type="number" name="{{entry.units}}" ng-model="entry.units" placeholder="3" min="0" max="999" maxlength="3" required> </td>
           <td><input type="number" name="{{entry.tmin}}" ng-model="entry.tmin" placeholder="0" min="-99" max="999" maxlength="3" required> °C</td>
@@ -59,6 +73,15 @@
           <td><input type="text" name="newDeviceName" ng-model="configVm.newDevice.name" placeholder="name" size="26"></td>
           <td><select name="protocolSelect-newDevice" ng-options="protocol for protocol in configVm.config.protocols" ng-model="configVm.newDevice.protocol"></select></td>
           <td><input type="text" name="{{configVm.newDevice.hostname}}" ng-model="configVm.newDevice.hostname" placeholder="192.168.0.101:80" size="18"></td>
+
+          <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups" multiple></select></td>
+
+          <!-- <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups"></select></td> -->
+          <td><input type="number" name="hashrate-newDevice" ng-model="configVm.newDevice.hashrate" placeholder="150" min="0" max="999999"> MH/s</td>
+          <td><input type="number" name="{{configVm.newDevice.units}}" ng-model="configVm.newDevice.units" placeholder="3" min ="1" max="999"></td>
+          <td><input type="number" name="{{configVm.newDevice.tmin}}" ng-model="configVm.newDevice.tmin" placeholder="0" min ="-99" max="999"> °C</td>
+          <td><input type="number" name="{{configVm.newDevice.tmax}}" ng-model="configVm.newDevice.tmax" placeholder="40" min ="0" max="999"> °C</td>
+
           <!-- <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups" multiple></select></td> -->
           <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups"></select></td>
           <td><input type="number" name="hashrate-newDevice" ng-model="configVm.newDevice.hashrate" placeholder="150" min="0" max="99999999999" step ="100"> MH/s</td>
@@ -159,6 +182,7 @@
 <div class="row" style="margin-bottom: 30px;">
   <div class="col-md-12">
     <button type="button" class="btn btn-primary" ng-click="configVm.deploy()" ng-disabled="config.$invalid">Deploy
+    <!-- <button type="button" class="btn btn-primary" ng-click="configVm.deploy()" >Deploy -->
     </button>
     <i ng-show="configVm.waitingDeploy" class="fa fa-cog fa-spin fa-lg fa-fw"></i>
     <span class="sr-only">Loading...</span>

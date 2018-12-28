@@ -27,6 +27,9 @@
             profitabilityServiceUrl:null,
             deployOnStartup:null,
             autoswitchInterval:null,
+            // ShowUnusedDevices:false,
+            // ShowUnusedPools:false,
+            RefreshStatsInterval:10,
             statsEnabled:null
         };
         vm.waiting = null;
@@ -241,6 +244,11 @@
                 vm.config.deployOnStartup=response.data.deployOnStartup;
                 vm.config.autoswitchInterval=response.data.autoswitchInterval;
                 vm.config.statsEnabled=response.data.statsEnabled;
+                
+                // vm.config.ShowUnusedDevices=response.data.ShowUnusedDevices;
+                // vm.config.ShowUnusedPools=response.data.ShowUnusedPools;
+                vm.config.RefreshStatsInterval=response.data.RefreshStatsInterval;
+
                 vm.config.devices = $filter('orderBy')(vm.config.devices, 'name');
                 vm.config.groups = $filter('orderBy')(vm.config.groups, 'name');
                 vm.config.entries = $filter('orderBy')(vm.config.entries, ['group','prio']);

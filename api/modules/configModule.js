@@ -16,12 +16,14 @@ var config = module.exports = {
     profitabilityServiceUrl:null,
     deployOnStartup:null,
     autoswitchInterval:3,
+    RefreshStatsInterval:10,
     statsEnabled:null
   },
   configNonPersistent:{
     protocols:[
       "http",
-      "https"
+      "https",
+      "ClaymoreAPI"
     ],
     algos:[
       "x11",
@@ -76,7 +78,11 @@ var config = module.exports = {
             config.config.deployOnStartup=false;
           if(config.config.autoswitchInterval===undefined)
             config.config.autoswitchInterval=3;
-          if(config.config.statsEnabled===undefined)
+              
+          if(config.config.RefreshStatsInterval===undefined)
+            config.config.RefreshStatsInterval=10;  
+
+            if(config.config.statsEnabled===undefined)
             config.config.statsEnabled=true;
 
         });
@@ -85,6 +91,7 @@ var config = module.exports = {
         config.config.deployOnStartup=false;
         config.config.statsEnabled=true;
         config.config.autoswitchInterval=3;
+        config.config.RefreshStatsInterval=10;
         config.saveConfig();
         setTimeout(function(){
           config.loadConfig();

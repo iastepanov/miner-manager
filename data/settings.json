@@ -25,6 +25,18 @@
       "group": "B"
     },
     {
+      "id": 1543472056697,
+      "enabled": true,
+      "stratum": "stratum+tcp://ethash.hk.nicehash.com:3333",
+      "username": "3M4fzgQPuSzhLc6apuCUaehJqAWu3FvveG",
+      "password": "x",
+      "prio": 0,
+      "appendWorker": true,
+      "group": "rig",
+      "algorithm": "",
+      "algo": "ethash"
+    },
+    {
       "id": 1538210433502,
       "enabled": true,
       "stratum": "stratum+tcp://qubit.hk.nicehash.com:3344",
@@ -175,6 +187,20 @@
         "B"
       ],
       "hashrate": 40000
+    },
+    {
+      "id": 1543489828916,
+      "enabled": true,
+      "name": "RIG",
+      "protocol": "ClaymoreAPI",
+      "hostname": "192.168.10.103:3333",
+      "groups": [
+        "rig"
+      ],
+      "hashrate": 156,
+      "units": 12,
+      "tmin": 0,
+      "tmax": 85
     }
   ],
   "groups": [
@@ -182,6 +208,13 @@
       "id": 1520759590964,
       "enabled": true,
       "name": "B",
+      "autoswitch": true,
+      "region": "eu"
+    },
+    {
+      "id": 1543471985883,
+      "enabled": false,
+      "name": "rig",
       "autoswitch": false,
       "region": "eu"
     },
@@ -189,12 +222,13 @@
       "id": 1520186996292,
       "enabled": true,
       "name": "x10",
-      "autoswitch": false,
+      "autoswitch": true,
       "region": "eu"
     }
   ],
   "profitabilityServiceUrl": "127.0.0.1:8081",
   "deployOnStartup": false,
-  "autoswitchInterval": 5,
+  "autoswitchInterval": 10,
+  "RefreshStatsInterval": 20,
   "statsEnabled": true
 }

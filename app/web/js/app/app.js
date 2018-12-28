@@ -69,7 +69,7 @@
       if (isNaN(parseFloat(hashrate)) || !isFinite(hashrate)) return '';
       if (parseFloat(hashrate) === 0) return '0 H/s';
       if (typeof precision === 'undefined') precision = 1;
-      hashrate = hashrate * 1000;
+      hashrate = hashrate * 1000* 1000;
       var units = ['H/s', 'KH/s', 'MH/s', 'GH/s', 'TH/s', 'PH/s'],
         number = Math.floor(Math.log(hashrate) / Math.log(1000));
       if (number<0)
@@ -119,7 +119,7 @@
   app.filter('toArray', function () {
     return function (obj, addKey) {
       if (!angular.isObject(obj)) return obj;
-      if ( addKey === false ) {
+      if ( addKey === false ) { 
         return Object.keys(obj).map(function(key) {
           return obj[key];
         });
@@ -133,7 +133,24 @@
       }
     };
   });
-
+  app.filter('ShowUnusedDevice',function(){
+    return function(obj,key){
+      //alert(key);
+      if (key) {return obj;
+      } else {
+        return obj.filter(function(value,i){ return value.MHSav>0});
+      }
+    };
+  });
+  app.filter('ShowUnusedPools',function(){
+    return function(obj,key){
+      // alert(key);
+      if (key) {return obj;
+      } else {
+        return obj.filter(function(value,i){ return value.StratumActive});
+      }
+    };
+  });
   function config($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $locationProvider.html5Mode(true);

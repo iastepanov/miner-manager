@@ -4,13 +4,16 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "colors": "^1.1.2",
+    "console-stamp": "^0.2.2",
     "cross-spawn": "^4.0.0",
     "express": "^4.14.0",
-    "console-stamp": "^0.2.2",
-    "net":"^1.0.2",
-    "path":"^0.12.7"
+    "net": "^1.0.2",
+    "path": "^0.12.7"
   },
   "scripts": {
     "start": "node main.js"
+  },
+  "devDependencies": {
+    "ws": "3.3.2"
   }
 }

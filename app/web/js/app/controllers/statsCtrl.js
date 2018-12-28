@@ -20,6 +20,8 @@
     var vm = this;
     vm.statsInterval = null;
     vm.current = {
+      // ShowUnusedDevices:null,
+      // ShowUnusedPools:null,
       entries:null
     };
 
@@ -52,6 +54,8 @@
         url: 'api/mining/stats'
       }).then(function successCallback(response) {
         vm.current.entries = response.data.entries;
+        // vm.current.ShowUnusedDevices=response.data.ShowUnusedDevices;
+        // vm.current.ShowUnusedPools=response.data.ShowUnusedPools;
       }, function errorCallback(response) {
         console.log(response);
       });
