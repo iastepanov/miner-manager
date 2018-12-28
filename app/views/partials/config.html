@@ -10,7 +10,7 @@
     </td>
     <td>In case autoswitching will be use (Deploy on startup:
         <input type="checkbox" ng-model="configVm.config.deployOnStartup" ng-click="configVm.setConfig()">&nbsp&nbsp&nbsp&nbsp  
-        Refresh profitability interval <input type="number" name="autoswitchInterval" ng-model="configVm.config.autoswitchInterval" placeholder="3" min="0.01" max="99999"> minute). 
+        Refresh profitability interval <input type="number" name="autoswitchInterval" ng-model="configVm.config.autoswitchInterval" placeholder="3" min="1" max="99999"> minute). 
     </td>  
   </tr >
   </table>
@@ -52,7 +52,7 @@
           
           <td><select name="groupSelect-{{entry.id}}" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="entry.groups[0]" required></select></td>
          
-          <td><input type="number" name="hashrate-{{entry.id}}" ng-model="entry.hashrate" placeholder="150" min="0" max="99999999999" step="100"  required> MH/s</td>
+          <td><input type="number" name="hashrate-{{entry.id}}" ng-model="entry.hashrate" placeholder="150" min="0" max="99999999999"  required> MH/s</td>
           <td><input type="number" name="{{entry.units}}" ng-model="entry.units" placeholder="3" min="0" max="999" maxlength="3" required> </td>
           <td><input type="number" name="{{entry.tmin}}" ng-model="entry.tmin" placeholder="0" min="-99" max="999" maxlength="3" required> °C</td>
           <td><input type="number" name="{{entry.tmax}}" ng-model="entry.tmax" placeholder="40" min="0" max="999" maxlength="3" required> °C</td>
@@ -67,7 +67,7 @@
           <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups" multiple></select></td>
 
           
-          <td><input type="number" name="hashrate-newDevice" ng-model="configVm.newDevice.hashrate" placeholder="150" min="0" max="99999999999" step ="100"> MH/s</td>
+          <td><input type="number" name="hashrate-newDevice" ng-model="configVm.newDevice.hashrate" placeholder="150" min="0" max="99999999999" > MH/s</td>
           <td><input type="number" name="configVm.newDevice.units" ng-model="configVm.newDevice.units" placeholder="3" min="0" max="999"required></td>
           <td><input type="number" name="configVm.newDevice.tmin" ng-model="configVm.newDevice.tmin" placeholder="0" min="-99" max="999" required> °C</td>
           <td><input type="number" name="configVm.newDevice.tmax" ng-model="configVm.newDevice.tmax" placeholder="40" min="-99" max="999" required> °C</td>
