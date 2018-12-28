@@ -16,12 +16,13 @@
           <th>Algo</th>
           <th>Temp</th>
           <th>Units</th>
-          <th>HashRate AVG</th>
+          <th> HashRate AVG</th>
           <th>Reject</th>
           <th>HwErrors</th>
           <th>UpTime </th>
         </tr>
       </thead>
+
       <tbody>
         <tr ng-repeat="entry in statsVm.current.entries | toArray |orderBy:'name'" >
           <td>{{$index+1}}</td>
@@ -29,9 +30,6 @@
 
           <td ng-bind="entry.hostname"></td>
           <td ng-class="{success:({{entry.time}}-{{entry.devs[0].LastShareTime}})<5*60, danger:({{entry.time}}-{{entry.devs[0].LastShareTime}})>=5*60 }">{{1000*entry.devs[0].LastShareTime|date:'HH:mm:ss'}}</td>
-
-          <td>{{entry.hostname}}</td>
-          <td>{{1000*entry.devs[0].LastShareTime|date:'HH:mm:ss'}}</td>
 
           <td>{{entry.devs[0].Algo}}</td>
           <td ng-class="{success:entry.pi.temp<entry.tmax && entry.pi.temp>entry.tmin,danger:entry.pi.temp>=entry.tmax || entry.pi.temp<=entry.tmin}">{{entry.pi.temp}} °C</td> 

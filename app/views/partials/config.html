@@ -20,12 +20,7 @@
   <div></div>
   <table class="table table-bordered table-condensed">
    <tr style="border-top: 2px solid black;">
-    <!-- <td>Show unused POOLS -->
-      <!-- <input type="checkbox" ng-model="configVm.config.ShowUnusedPools" ng-click="configVm.setConfig()">  -->
-    <!-- </td> -->
-    <!-- <td>Show unused DEVICES -->
-      <!-- <input type="checkbox" ng-model="configVm.config.ShowUnusedDevices" ng-click="configVm.setConfig()"> -->
-    <!-- </td> -->
+  
     <td>Refresh stats interval
       <input type="number" name="RefreshStatsInterval" ng-model="configVm.config.RefreshStatsInterval" min = "10" max="99999" ng-change="configVm.setConfig()"> seconds
     </td>
@@ -56,12 +51,7 @@
           <!-- <td><select name="groupSelect-{{entry.id}}" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="entry.groups" multiple required></select></td> -->
           
           <td><select name="groupSelect-{{entry.id}}" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="entry.groups[0]" required></select></td>
-
-          <td><input type="number" name="hashrate-{{entry.id}}" ng-model="entry.hashrate" placeholder="150" min="0" max="999999"required> MH/s</td>
-          <td><input type="number" name="{{entry.units}}" ng-model="entry.units" placeholder="3" min="1" max="999" required> </td>
-          <td><input type="number" name="{{entry.tmin}}" ng-model="entry.tmin" placeholder="0"  min="-99" max="999"  required> °C</td>
-          <td><input type="number" name="{{entry.tmax}}" ng-model="entry.tmax" placeholder="40"  min="0" max="999" required> °C</td>
-
+         
           <td><input type="number" name="hashrate-{{entry.id}}" ng-model="entry.hashrate" placeholder="150" min="0" max="99999999999" step="100"  required> MH/s</td>
           <td><input type="number" name="{{entry.units}}" ng-model="entry.units" placeholder="3" min="0" max="999" maxlength="3" required> </td>
           <td><input type="number" name="{{entry.tmin}}" ng-model="entry.tmin" placeholder="0" min="-99" max="999" maxlength="3" required> °C</td>
@@ -76,18 +66,11 @@
 
           <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups" multiple></select></td>
 
-          <!-- <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups"></select></td> -->
-          <td><input type="number" name="hashrate-newDevice" ng-model="configVm.newDevice.hashrate" placeholder="150" min="0" max="999999"> MH/s</td>
-          <td><input type="number" name="{{configVm.newDevice.units}}" ng-model="configVm.newDevice.units" placeholder="3" min ="1" max="999"></td>
-          <td><input type="number" name="{{configVm.newDevice.tmin}}" ng-model="configVm.newDevice.tmin" placeholder="0" min ="-99" max="999"> °C</td>
-          <td><input type="number" name="{{configVm.newDevice.tmax}}" ng-model="configVm.newDevice.tmax" placeholder="40" min ="0" max="999"> °C</td>
-
-          <!-- <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups" multiple></select></td> -->
-          <td><select name="groupSelect-newDevice" ng-options="group.name as group.name for group in configVm.config.groups" ng-model="configVm.newDevice.groups"></select></td>
+          
           <td><input type="number" name="hashrate-newDevice" ng-model="configVm.newDevice.hashrate" placeholder="150" min="0" max="99999999999" step ="100"> MH/s</td>
-          <td><input type="number" name="{{configVm.newDevice.units}}" ng-model="configVm.newDevice.units" placeholder="3" min="0" max="999"required></td>
-          <td><input type="number" name="{{configVm.newDevice.tmin}}" ng-model="configVm.newDevice.tmin" placeholder="0" min="-99" max="999" required> °C</td>
-          <td><input type="number" name="{{configVm.newDevice.tmax}}" ng-model="configVm.newDevice.tmax" placeholder="40" min="-99" max="999" required> °C</td>
+          <td><input type="number" name="configVm.newDevice.units" ng-model="configVm.newDevice.units" placeholder="3" min="0" max="999"required></td>
+          <td><input type="number" name="configVm.newDevice.tmin" ng-model="configVm.newDevice.tmin" placeholder="0" min="-99" max="999" required> °C</td>
+          <td><input type="number" name="configVm.newDevice.tmax" ng-model="configVm.newDevice.tmax" placeholder="40" min="-99" max="999" required> °C</td>
           <td><button type="button" class="btn btn-success" ng-click="configVm.addDevice()">add Device</button></td>
         </tr>
       </table>
@@ -172,7 +155,8 @@
 
 <div class="row" style="margin-bottom: 10px;">
   <div class="col-md-12">
-    <button type="button" class="btn btn-success" ng-click="configVm.setConfig()" ng-disabled="config.$invalid">Save
+    <!-- <button type="button" class="btn btn-success" ng-click="configVm.setConfig()" ng-disabled="config.$invalid">Save -->
+    <button type="button" class="btn btn-success" ng-click="configVm.setConfig()" ">Save
     </button>
     <i ng-show="configVm.waiting" class="fa fa-cog fa-spin fa-lg fa-fw"></i>
     <span class="sr-only">Loading...</span>
