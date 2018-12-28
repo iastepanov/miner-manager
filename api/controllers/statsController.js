@@ -226,7 +226,7 @@ function getMinerStats(device) {
         var _devs_rejected=(data.result[10]+";"+data.result[13]).split(";");
         var max_temp=-99;
         //Как-то неправильно поступаю с определением _devs_algo_1
-        var _devs_algo_1 = data.result[3].split(";").map(function(name) {return 'ETH';});
+        var _devs_algo_1 = data.result[3].split(";").map(function(name) {return '1stAlgo';});
         var _devs_algo_2 = data.result[3].split(";").map(function(name) {return '2ndAlgo';});
         
         var _devs_algo=_devs_algo_1.concat(_devs_algo_2);
