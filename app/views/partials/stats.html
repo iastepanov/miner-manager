@@ -70,6 +70,8 @@
 
         <div class="col-md-12" style="margin-bottom: 10px;">
           <span style="font-size:150%;"><b>Miner: {{entry.name}}&nbsp;{{entry.hostname}}</b></span>
+          <span style="font-size:150%;"><b>&nbsp;&bull;&nbsp;Status: {{entry.errors}}</b></span>
+          
         </div>
 
         <table ng-show="entry.devs" class="table table-bordered table-condensed">
@@ -162,7 +164,7 @@
           </tr>
         </tbody>
       </table>
-      <span style="font-size:85%;" class="pull-right"> Miner: {{entry.uptime|secondsToTimeString}}&nbsp;&bull;&nbsp; Pi: {{entry.pi.uptime|secondsToTimeString}}&nbsp;&bull;&nbsp; Temp: {{entry.pi.temp}} °C &nbsp;&bull;&nbsp; Load: {{entry.pi.load|number:2}}</span>
+      <span style="font-size:85%;" class="pull-right"> Miner: {{entry.uptime|secondsToTimeString}}&nbsp;&bull;&nbsp; MainBoard: {{entry.pi.uptime|secondsToTimeString}}&nbsp;&bull;&nbsp; Temp: {{entry.pi.temp}} °C &nbsp;&bull;&nbsp; Load: {{entry.pi.load|number:2}}</span>
     </div>
   </div>
 </div>

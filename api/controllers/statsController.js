@@ -34,7 +34,8 @@ function getMinerStats(device) {
   var arr = device.hostname.split(":");
   switch(device.protocol){
     case "http":
-      var req= http.request({
+    
+    var req= http.request({
         host: arr[0],
         path: '/f_status.php?all=1',
 	      method: 'GET',
@@ -44,21 +45,23 @@ function getMinerStats(device) {
         }
       }, function (response) {
         response.setEncoding('utf8');
-        var body = '';
+         var body = '';
 
         response.on('data', function (d) {
+          console.log('Connected: '+colors.green("["+device.name+"]:") +device.hostname);
           body += d;
         });
         response.on('end', function () {
-          
+          console.log('Connection closed: ' +colors.green("["+device.name+"]:") +device.hostname);
           var parsed = null;
           
 
           try{
             parsed=JSON.parse(body);
-            
+            parsed.status.errors = "Ok"
           }catch(error){
             console.log(colors.red("["+device.name+"] Error: Unable to get stats data"));
+            parsed.status.errors = "Error: Unable to get stats data";
             console.log(error);
           }
           if (parsed != null){
@@ -70,7 +73,7 @@ function getMinerStats(device) {
               parsed.status.tmin=device.tmin;
               parsed.status.tmax=device.tmax;
               
-              parsed.status.pools = [...parsed.status.pools];
+              // parsed.status.pools = [...parsed.status.pools];
               
               /*parsed.status.pools = [...parsed.status.pools].filter(function(item,i){
                 return item.StratumActive
@@ -84,10 +87,13 @@ function getMinerStats(device) {
           }
         });
       }).on("error", function(error) {
-        console.log(colors.red("["+device.name+"] Error: Unable to deploy config"));
+        console.log(colors.red("["+device.name+"] Error: Unable to connect"));
+        // parsed.status.errors = "Connection error: Unable to connect";
         console.log(error);
       });
-      req.end();
+      req.end(function(){
+        // console.log('Connection closed: ' +colors.green("["+device.name+"]:") +device.hostname);
+      });
 
       break;
     case "https":
@@ -160,6 +166,7 @@ function getMinerStats(device) {
     body.status.tmin=device.tmin;
     body.status.tmax=device.tmax;
     body.status.time = Math.floor((new Date()-0)/1000);
+    body.status.errors='Ok';
 
     body.status.devs[0] = {
       LastShareTime:Math.floor((new Date()-0)/1000)-6*60+1,
@@ -189,24 +196,26 @@ function getMinerStats(device) {
       
      
       client.on('error', function(error){
-        console.log('An error occurred: '+ error);
+        console.log('An error occurred: '+colors.red("["+device.name+"]: ")+ error);
+        body.status.errors='Connection error. '+ error;
         client.destroy();
       });
       
       client.setTimeout (configModule.config.RefreshStatsInterval*1000*0.4);
       
       client.on('timeout', function(){
-        console.log('Timeout');
+        console.log('Timeout: '+colors.yellow("["+device.name+"]: ")+device.hostname);
+        body.ststus.error='Warning: Timeout '+ "["+device.name+"]: "+device.hostname;
         client.destroy(); // kill client if server does not response
       });
       
       client.on('close', function() {
-        console.log('Connection closed');
+        console.log('Connection closed: ' +colors.green("["+device.name+"]:") +device.hostname);
       });
       
       client.connect(arr[1],arr[0], function() {
           
-        console.log('Connected');
+        console.log('Connected: '+colors.green("["+device.name+"]:") +device.hostname);
           const a='{"id":1,"jsonrpc":"2.0","method":"miner_getstat2"}';
 	        client.write(a);
         });
